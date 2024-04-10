@@ -2,6 +2,7 @@ type DayScheduleType = {
   day: string;
   date: string;
   weather: string;
+  details : DayScheduleDetailType[];
 };
 
 type DayScheduleDetailType = {

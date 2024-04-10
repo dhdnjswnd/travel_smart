@@ -16,7 +16,6 @@ const fillWidth: React.CSSProperties = {
 const DayScheduleDetail = (props: { detail: DayScheduleDetailType }) => {
   const detail = props.detail;
   var widthCss: React.CSSProperties = {
-    flexShrink:0,
   };
   if (detail.type !== "start" && detail.type !== "end") {
     widthCss = fillWidth;
@@ -26,7 +25,7 @@ const DayScheduleDetail = (props: { detail: DayScheduleDetailType }) => {
       <Space direction="vertical" align="center" style={heightFix}>
         <span>{detail.spot}</span>
       </Space>
-      <Space direction="vertical" style={{ width: "100%" }}>
+      <Space direction="vertical" style={fillWidth}>
         <DayTimeLine timeLineType={detail.type}></DayTimeLine>
       </Space>
       <Space direction="vertical" align="center" style={heightFix}>

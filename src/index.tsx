@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import { Flex, Space } from "antd";
 import reportWebVitals from "./reportWebVitals";
-import DaySchedule from "./component/journey/DaySchedule";
-import type { DayScheduleType } from "./component/DayScheduleTypes";
+
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -17,32 +16,8 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Menu } from "antd";
+import TotalSchedule from "./component/journey/TotalSchedule";
 
-const day1: DayScheduleType = {
-  day: "08.24",
-  date: "토",
-  weather: "좋음",
-};
-const day2: DayScheduleType = {
-  day: "08.25",
-  date: "일",
-  weather: "비",
-};
-const day3: DayScheduleType = {
-  day: "08.26",
-  date: "월",
-  weather: "흐림",
-};
-const day4: DayScheduleType = {
-  day: "08.27",
-  date: "화",
-  weather: "눈",
-};
-const day5: DayScheduleType = {
-  day: "08.28",
-  date: "수",
-  weather: "눈",
-};
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -85,13 +60,17 @@ const items: MenuItem[] = [
   ]),
 ];
 
+
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+
+
 root.render(
   <React.StrictMode>
-    <Flex>
+    <Flex style={{ height: "100vh" }}>
       <Menu
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
@@ -100,14 +79,7 @@ root.render(
         inlineCollapsed={true}
         items={items}
       />
-      <Space direction="vertical">
-        <h1>두바이 스위스 여행</h1>
-        <DaySchedule dayScheduleType={day1} index={1}></DaySchedule>
-        <DaySchedule dayScheduleType={day2} index={2}></DaySchedule>
-        <DaySchedule dayScheduleType={day3} index={3}></DaySchedule>
-        <DaySchedule dayScheduleType={day4} index={4}></DaySchedule>
-        <DaySchedule dayScheduleType={day5} index={5}></DaySchedule>
-      </Space>
+      <TotalSchedule></TotalSchedule>
     </Flex>
   </React.StrictMode>
 );
