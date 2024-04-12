@@ -38,8 +38,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
+  getItem("설정", "1", <PieChartOutlined />),
+  getItem("전체일정", "2", <DesktopOutlined />),
   getItem("Option 3", "3", <ContainerOutlined />),
 
   getItem("Navigation One", "sub1", <MailOutlined />, [
@@ -73,7 +73,6 @@ root.render(
     <Flex style={{ height: "100vh" }}>
       <Menu
         defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
         mode="inline"
         theme="dark"
         inlineCollapsed={true}

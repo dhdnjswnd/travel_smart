@@ -6,6 +6,7 @@ import type {
   DayScheduleType,
 } from "../DayScheduleTypes";
 import { Input } from "antd";
+import styles from "./TotalSchedule.module.css";
 
 const editableTitleStyle: React.CSSProperties = {
   border: "none",
@@ -76,24 +77,42 @@ const TotalSchedule = () => {
   };
 
   return (
-    <Space
-      direction="vertical"
-      style={{ backgroundColor: "green", width:'320px', padding:"10px"}}
-    >
+    <Flex vertical>
       <Input
         style={editableTitleStyle}
         defaultValue={title}
         onBlur={(event) => titleChanged(event)}
       ></Input>
-      <Flex vertical>
-        <DaySchedule dayScheduleType={day1} index={1}></DaySchedule>
-        <DaySchedule dayScheduleType={day2} index={2}></DaySchedule>
-        <DaySchedule dayScheduleType={day3} index={3}></DaySchedule>
-        <DaySchedule dayScheduleType={day4} index={4}></DaySchedule>
-        <DaySchedule dayScheduleType={day5} index={5}></DaySchedule>
-        <DaySchedule dayScheduleType={day5} index={6}></DaySchedule>
-      </Flex>
-    </Space>
+      <Space
+        className={styles.leftScroll}
+        direction="vertical"
+        style={{
+          backgroundColor: "green",
+          width: "320px",
+          padding: "10px",
+          height: "97vh",
+          overflowY: "scroll",
+        }}
+      >
+        <Flex vertical>
+          <DaySchedule dayScheduleType={day1} index={1}></DaySchedule>
+          <DaySchedule dayScheduleType={day2} index={2}></DaySchedule>
+          <DaySchedule dayScheduleType={day3} index={3}></DaySchedule>
+          <DaySchedule dayScheduleType={day4} index={4}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={5}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={5}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={6}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={7}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={8}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={6}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={7}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={8}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={6}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={7}></DaySchedule>
+          <DaySchedule dayScheduleType={day5} index={8}></DaySchedule>
+        </Flex>
+      </Space>
+    </Flex>
   );
 };
 
