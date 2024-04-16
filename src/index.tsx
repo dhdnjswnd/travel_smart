@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -17,7 +17,7 @@ import {
 import type { MenuProps } from "antd";
 import { Button, Menu } from "antd";
 import TotalSchedule from "./component/journey/TotalSchedule";
-
+import CompoundedSpace from "antd/es/space";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -37,39 +37,62 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuItem[] = [
-  getItem("설정", "1", <PieChartOutlined />),
-  getItem("전체일정", "2", <DesktopOutlined />),
-  getItem("Option 3", "3", <ContainerOutlined />),
+const openStyle: React.CSSProperties = {
+  display: "block",
+};
 
-  getItem("Navigation One", "sub1", <MailOutlined />, [
-    getItem("Option 5", "5"),
-    getItem("Option 6", "6"),
-    getItem("Option 7", "7"),
-    getItem("Option 8", "8"),
-  ]),
-
-  getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-    getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
-
-    getItem("Submenu", "sub3", null, [
-      getItem("Option 11", "11"),
-      getItem("Option 12", "12"),
-    ]),
-  ]),
-];
-
-
+const closeStyle: React.CSSProperties = {
+  display: "none",
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const MainBody = () => {
+  const [leftCss, setLeftCss] = useState(closeStyle);
 
 
-root.render(
-  <React.StrictMode>
+
+  function handleLeft() {
+    if (leftCss == closeStyle) {
+      setLeftCss(openStyle);
+    }else {
+      setLeftCss(closeStyle);
+    }
+  }
+
+  const onClick: MenuProps["onClick"] = (openKeys) => {
+    console.log(openKeys);
+    if(openKeys.key=="1"){
+      handleLeft();
+    }
+  };
+
+  const items: MenuItem[] = [
+    getItem("설정", "1", <PieChartOutlined />),
+    getItem("전체일정", "2", <DesktopOutlined />),
+    getItem("Option 3", "3", <ContainerOutlined />),
+
+    getItem("Navigation One", "sub1", <MailOutlined />, [
+      getItem("Option 5", "5"),
+      getItem("Option 6", "6"),
+      getItem("Option 7", "7"),
+      getItem("Option 8", "8"),
+    ]),
+
+    getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
+      getItem("Option 9", "9"),
+      getItem("Option 10", "10"),
+
+      getItem("Submenu", "sub3", null, [
+        getItem("Option 11", "11"),
+        getItem("Option 12", "12"),
+      ]),
+    ]),
+  ];
+
+  return (
     <Flex style={{ height: "100vh" }}>
       <Menu
         defaultSelectedKeys={["1"]}
@@ -77,9 +100,16 @@ root.render(
         theme="dark"
         inlineCollapsed={true}
         items={items}
+        onClick={onClick}
       />
-      <TotalSchedule></TotalSchedule>
+      <TotalSchedule css={leftCss} close={handleLeft}></TotalSchedule>
     </Flex>
+  );
+};
+
+root.render(
+  <React.StrictMode>
+    <MainBody />
   </React.StrictMode>
 );
 

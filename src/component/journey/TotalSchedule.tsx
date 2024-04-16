@@ -1,4 +1,4 @@
-import React, { FocusEvent } from "react";
+import React, { useState, FocusEvent, MouseEvent } from "react";
 import { Flex, Space } from "antd";
 import DaySchedule from "./DaySchedule";
 import type {
@@ -7,11 +7,13 @@ import type {
 } from "../DayScheduleTypes";
 import { Input } from "antd";
 import styles from "./TotalSchedule.module.css";
+import { LeftOutlined } from "@ant-design/icons";
 
 const editableTitleStyle: React.CSSProperties = {
   border: "none",
   fontSize: "20px",
   fontWeight: "bold",
+  flexGrow: "1",
 };
 
 const detail: DayScheduleDetailType = {
@@ -67,22 +69,31 @@ const day5: DayScheduleType = {
   details: [detail, detail2, detail3, detail4],
 };
 
-const TotalSchedule = () => {
+const TotalSchedule = (props: { css: React.CSSProperties; close: any }) => {
   var title = "두바이 스위스 여행";
   const titleChanged = (e: FocusEvent<HTMLInputElement, Element>) => {
     if (title !== e.target.value) {
       alert("값이 변경되었습니다. 값 변경 처리 필요합니다.");
+
       title = e.target.value;
     }
   };
 
   return (
-    <Flex vertical>
-      <Input
-        style={editableTitleStyle}
-        defaultValue={title}
-        onBlur={(event) => titleChanged(event)}
-      ></Input>
+    <Flex vertical style={props.css}>
+      <Flex>
+        <Input
+          style={editableTitleStyle}
+          defaultValue={title}
+          onBlur={(event) => titleChanged(event)}
+        ></Input>
+        <Space style={{ padding: "10px", flexGrow: "0" }}>
+          <LeftOutlined
+            style={{ fontSize: "20px", cursor: "pointer" }}
+            onClick={props.close}
+          ></LeftOutlined>
+        </Space>
+      </Flex>
       <Space
         className={styles.leftScroll}
         direction="vertical"
